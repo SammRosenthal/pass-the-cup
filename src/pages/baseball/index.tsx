@@ -1,5 +1,6 @@
 import { MlbGameData } from "../../api/mlb/getAllGames";
 import DetailLayout from "../../components/layouts/Detail";
+import { Loader } from "../../components/Loader";
 import TeamCard from "../../components/TeamCard/TeamCard";
 import { trpc } from "../../utils/trpc";
 
@@ -41,12 +42,18 @@ export const Baseball = () => {
         <h1 className="text-2xl">Baseball</h1>
       </div>
       <div className={container}>
-        <h2 className="text-lg pb-2">Current Games</h2>
-        <div className="flex flex-col gap-y-2 w-full mt-2">
-          {activeGames?.map((game) => {
-            return <ActiveGame game={game} key={game.GameID} />;
-          })}
-        </div>
+        {activeGames ? (
+          <>
+            <h2 className="text-lg pb-2">Current Games</h2>
+            <div className="flex flex-col gap-y-2 w-full mt-2">
+              {activeGames?.map((game) => {
+                return <ActiveGame game={game} key={game.GameID} />;
+              })}
+            </div>
+          </>
+        ) : (
+          <Loader />
+        )}
       </div>
     </DetailLayout>
   );
