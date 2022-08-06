@@ -4,9 +4,20 @@ import type { AppRouter } from "../server/router";
 import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import "../styles/globals.css";
+import Base from "../components/layouts/Base";
+import Head from "next/head";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+  return (
+    <Base>
+      <Head>
+        <title>Pass the Cup</title>
+        <meta name="description" content="Pass the Cup" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Component {...pageProps} />
+    </Base>
+  );
 };
 
 const getBaseUrl = () => {
