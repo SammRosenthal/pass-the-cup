@@ -14,8 +14,10 @@ const cardStyle =
 export const Home = () => {
   return (
     <DetailLayout className="gap-y-2">
-      <div className={`${container} border-b-2 border-white`}>
-        <h1 className="text-xl">Choose a sport to see what games are on.</h1>
+      <div className={`${container} border-b-2 border-white pb-3`}>
+        <h1 className="text-xl text-center">
+          Choose a sport to see what games are on.
+        </h1>
       </div>
       <div className={container}>
         <div className="flex flex-col gap-y-2 w-full mt-2">
@@ -25,7 +27,7 @@ export const Home = () => {
               <span className="text-lg">Baseball</span>
             </div>
           </Link>
-          <Link href="/basketball">
+          {/* <Link href="/basketball">
             <div className={cardStyle}>
               <IoIosBasketball className="text-3xl" />
               <span className="text-lg">Basketball</span>
@@ -36,7 +38,7 @@ export const Home = () => {
               <IoIosAmericanFootball className="text-3xl" />
               <span className="text-lg">Football</span>
             </div>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </DetailLayout>
