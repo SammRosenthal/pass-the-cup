@@ -1,8 +1,9 @@
+import Link from "next/link";
+import { trpc } from "../../utils/trpc";
 import { MlbGameData } from "../../api/mlb/getAllGames";
 import DetailLayout from "../../components/layouts/Detail";
 import { Loader } from "../../components/Loader";
 import TeamCard from "../../components/TeamCard/TeamCard";
-import { trpc } from "../../utils/trpc";
 
 const container = "flex flex-col items-center pb-1";
 
@@ -12,18 +13,20 @@ enum GameStatuses {
 
 export const ActiveGame: React.FC<{ game: MlbGameData }> = ({ game }) => {
   return (
-    <div className="flex flex-col  bg-gray-600 rounded-md p-2 gap-y-2 cursor-pointer overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center justify-evenly gap-x-2">
-        <TeamCard team={game.AwayTeam} />
-        <b className="text-md whitespace-nowrap">{`${game.HomeTeamRuns} - ${game.AwayTeamRuns}`}</b>
-        <TeamCard team={game.HomeTeam} />
+    <Link href={`/baseball/${game.GameID}`}>
+      <div className="flex flex-col bg-gray-600 rounded-md p-2 gap-y-2 cursor-pointer overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center justify-evenly gap-x-2">
+          <TeamCard team={game.AwayTeam} />
+          <b className="text-md whitespace-nowrap">{`${game.HomeTeamRuns} - ${game.AwayTeamRuns}`}</b>
+          <TeamCard team={game.HomeTeam} />
+        </div>
+        {/* Game Stats */}
+        <div className="flex justify-center">
+          <span>{game.InningDescription}</span>
+        </div>
       </div>
-      {/* Game Stats */}
-      <div className="flex justify-center">
-        <span>{game.InningDescription}</span>
-      </div>
-    </div>
+    </Link>
   );
 };
 
