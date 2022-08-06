@@ -1,6 +1,5 @@
-import Image from "next/image";
 import { Disclosure } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { PlusSmIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import classNames from "../../../utils/classNames";
@@ -34,26 +33,10 @@ export default function Example() {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex-shrink-0 flex items-center">
-                  <div className="block relative lg:hidden h-8 w-auto">
-                    <Image
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                      alt="Workflow"
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                    <Image
-                      src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                      alt="Workflow"
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </div>
-                </div>
+
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                   {navigation.map((item) => {
                     const isCurrent = router.asPath === item.href;
-
                     return (
                       <Link key={item.name} href={item.href}>
                         <a
@@ -85,15 +68,6 @@ export default function Example() {
                     />
                   </button>
                 </div>
-                <div className="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
-                  <button
-                    type="button"
-                    className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -102,7 +76,6 @@ export default function Example() {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navigation.map((item) => {
                 const isCurrent = router.asPath === item.href;
-
                 return (
                   <Link key={item.name} href={item.href}>
                     <Disclosure.Button
