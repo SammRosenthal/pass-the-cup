@@ -8,8 +8,8 @@ import Link from "next/link";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Baseball", href: "/baseball" },
-  { name: "Football", href: "/football" },
-  { name: "Basketball", href: "/basketball" },
+  // { name: "Football", href: "/football" },
+  // { name: "Basketball", href: "/basketball" },
 ];
 
 export default function Example() {
