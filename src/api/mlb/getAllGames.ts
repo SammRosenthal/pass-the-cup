@@ -85,13 +85,25 @@ export interface MlbGameData {
 
 export const getAllGames = async (): Promise<MlbGameData[]> => {
   try {
-    const response = await fetch(
-      `https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${moment().format(
-        "YYYY-MMM-D"
-      )}?key=${env.MLB_API_KEY}`
-    );
+    const today = moment().format("YYYY-MMM-D");
+    const yesterday = moment().subtract(1, "days").format("YYYY-MMM-D");
 
-    return response.json() as Promise<MlbGameData[]>;
+    return Promise.all([
+      fetch(
+        `https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${today}?key=${env.MLB_API_KEY}`
+      ),
+      fetch(
+        `https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yesterday}?key=${env.MLB_API_KEY}`
+      ),
+    ])
+      .then(([today, yesterday]) => {
+        return Promise.all([today.json(), yesterday.json()]);
+      })
+      .then(([today, yesterday]) => {
+        const test = [...today, ...yesterday];
+        console.log(test);
+        return test;
+      });
   } catch (e) {
     // TODO error handling
     throw Error("ISSUE FETCHING ALL MLB GAMES");

@@ -7,7 +7,7 @@ import TeamCard from "../../components/TeamCard/TeamCard";
 
 const container = "flex flex-col items-center pb-1";
 
-enum GameStatuses {
+export enum GameStatuses {
   inProgress = "InProgress",
 }
 
