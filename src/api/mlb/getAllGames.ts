@@ -1,5 +1,6 @@
 import moment from "moment";
 import { env } from "process";
+import fetcher from "../fetcher";
 
 // TODO clean this up to only the usefull data we use
 export interface MlbGameData {
@@ -88,22 +89,16 @@ export const getAllGames = async (): Promise<MlbGameData[]> => {
     const today = moment().format("YYYY-MMM-D");
     const yesterday = moment().subtract(1, "days").format("YYYY-MMM-D");
 
-    return Promise.all([
-      fetch(
+    const [todaysGames, yesterdaysGames] = await Promise.all([
+      fetcher(
         `https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${today}?key=${env.MLB_API_KEY}`
       ),
-      fetch(
+      fetcher(
         `https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yesterday}?key=${env.MLB_API_KEY}`
       ),
-    ])
-      .then(([today, yesterday]) => {
-        return Promise.all([today.json(), yesterday.json()]);
-      })
-      .then(([today, yesterday]) => {
-        const test = [...today, ...yesterday];
-        console.log(test);
-        return test;
-      });
+    ]);
+
+    return [...todaysGames, yesterdaysGames];
   } catch (e) {
     // TODO error handling
     throw Error("ISSUE FETCHING ALL MLB GAMES");
