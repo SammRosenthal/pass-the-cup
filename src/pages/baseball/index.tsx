@@ -4,6 +4,8 @@ import { MlbGameData } from "../../api/mlb/getAllGames";
 import DetailLayout from "../../components/layouts/Detail";
 import { Loader } from "../../components/Loader";
 import TeamCard from "../../components/TeamCard/TeamCard";
+import { NoGames } from "../../components/EmptyViews/NoGames";
+import { ErrorFetchingGames } from "../../components/ErrorViews/ErrorFetchingGames";
 
 const container = "flex flex-col items-center pb-1";
 
@@ -11,7 +13,9 @@ export enum GameStatuses {
   inProgress = "InProgress",
 }
 
-export const ActiveGame: React.FC<{ game: MlbGameData }> = ({ game }) => {
+export const ActiveBaseballGame: React.FC<{ game: MlbGameData }> = ({
+  game,
+}) => {
   return (
     <Link href={`/baseball/${game.GameID}`}>
       <div className="flex flex-col bg-gray-600 rounded-md p-2 gap-y-2 cursor-pointer overflow-hidden">
@@ -32,30 +36,32 @@ export const ActiveGame: React.FC<{ game: MlbGameData }> = ({ game }) => {
 
 export const Baseball = () => {
   const { data, isLoading, isError, error } = trpc.useQuery(["mlb.allGames"]);
+
   const activeGames = data?.filter(
     (game) => game.Status === GameStatuses.inProgress
   );
 
-  if (isError) <div>uh oh error! {JSON.stringify(error)}</div>;
-  if (isLoading) <div>Loading......</div>;
-
   return (
-    <DetailLayout className="gap-y-2">
-      <div className={`${container} border-b-2 border-white`}>
-        <h1 className="text-2xl">Baseball</h1>
-      </div>
+    <DetailLayout title="Baseball" className="gap-y-2">
       <div className={container}>
-        {activeGames ? (
+        {isError && <ErrorFetchingGames error={error} />}
+        {isLoading && <Loader />}
+        {activeGames && !activeGames.length && <NoGames />}
+
+        {!!activeGames?.length && (
           <>
             <h2 className="text-lg pb-2">Current Games</h2>
             <div className="flex flex-col gap-y-2 w-full mt-2">
-              {activeGames?.map((game) => {
-                return <ActiveGame game={game} key={game.GameID} />;
+              {activeGames.map((game) => {
+                return (
+                  <ActiveBaseballGame
+                    game={game}
+                    key={`${game.AwayTeam}at${game.HomeTeam}`}
+                  />
+                );
               })}
             </div>
           </>
-        ) : (
-          <Loader />
         )}
       </div>
     </DetailLayout>

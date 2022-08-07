@@ -242,4 +242,12 @@ const mlbImageMap: MlbImageEntry = {
       objectFit="contain"
     />
   ),
+  CHW: (
+    <Image
+      src="https://sportslogosvg.com/wp-content/uploads/2020/09/white-sox.png"
+      alt="White Sox"
+      layout="fill"
+      objectFit="contain"
+    />
+  ),
 };
