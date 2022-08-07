@@ -7,10 +7,7 @@ export const Football = () => {
   const [activeGames] = useState(Array(9).fill("test entry for Football"));
 
   return (
-    <DetailLayout className="gap-y-2">
-      <div className={`${container} border-b-2 border-white`}>
-        <h1 className="text-2xl">Football</h1>
-      </div>
+    <DetailLayout title="Football" className="gap-y-2">
       <div className={container}>
         <h2 className="text-lg pb-2">Current Games</h2>
         <div className="flex flex-col gap-y-2 w-full mt-2">

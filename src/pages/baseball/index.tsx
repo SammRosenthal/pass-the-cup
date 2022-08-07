@@ -46,7 +46,7 @@ export const Baseball = () => {
       <div className={container}>
         {isError && <ErrorFetchingGames error={error} />}
         {isLoading && <Loader />}
-        {activeGames && !activeGames.length && <NoGames />}
+        {activeGames && activeGames?.length === 0 && <NoGames />}
 
         {!!activeGames?.length && (
           <>

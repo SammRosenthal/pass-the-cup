@@ -13,7 +13,7 @@ const cardStyle =
 
 export const Home = () => {
   return (
-    <DetailLayout className="gap-y-2">
+    <DetailLayout title="" className="gap-y-2">
       <div className={`${container} border-b-2 border-white pb-3`}>
         <h1 className="text-xl text-center">
           Choose a sport to see what games are on.

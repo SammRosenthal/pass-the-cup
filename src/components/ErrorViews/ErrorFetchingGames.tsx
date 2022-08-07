@@ -8,3 +8,5 @@ export const ErrorFetchingGames: React.FC<{ error: any }> = ({ error }) => {
     </div>
   );
 };
+
+export default ErrorFetchingGames;
