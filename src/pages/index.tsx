@@ -13,12 +13,10 @@ const cardStyle =
 
 export const Home = () => {
   return (
-    <DetailLayout title="" className="gap-y-2">
-      <div className={`${container} border-b-2 border-white pb-3`}>
-        <h1 className="text-xl text-center">
-          Choose a sport to see what games are on.
-        </h1>
-      </div>
+    <DetailLayout
+      title="Choose a sport to see what games are on"
+      className="gap-y-2"
+    >
       <div className={container}>
         <div className="flex flex-col gap-y-2 w-full mt-2">
           <Link href="/baseball">

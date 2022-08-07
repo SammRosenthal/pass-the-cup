@@ -15,7 +15,7 @@ export const DetailLayout: React.FC<{
       ref={parent}
     >
       <div className={`${container} border-b-2 border-white`}>
-        <h1 className="text-2xl">{title}</h1>
+        <h1 className="text-2xl text-center">{title}</h1>
       </div>
       {children}
     </div>

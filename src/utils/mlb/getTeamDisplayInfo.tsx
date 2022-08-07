@@ -4,8 +4,12 @@ export type MlbImageEntry = {
   [key: string]: JSX.Element;
 };
 
-export const getTeamLogo = (team: string) => {
-  return mlbImageMap[team];
+export type MlbNameEntry = {
+  [key: string]: string;
+};
+
+export const getTeamDisplayInfo = (team: string) => {
+  return { logo: mlbImageMap[team], name: mlbNameMap[team] };
 };
 
 const mlbImageMap: MlbImageEntry = {
@@ -250,4 +254,37 @@ const mlbImageMap: MlbImageEntry = {
       objectFit="contain"
     />
   ),
+};
+
+const mlbNameMap: MlbNameEntry = {
+  ATL: "Braves",
+  NYM: "Mets",
+  MIA: "Marlins",
+  CHC: "Cubs",
+  DET: "Tigers",
+  CLE: "Guardians",
+  KC: "Royals",
+  MIN: "Twins",
+  CIN: "Reds",
+  MIL: "Brewers",
+  PIT: "Pirates",
+  STL: "Cardinals",
+  BAL: "Orioles",
+  BOS: "Red Sox",
+  NYY: "Yankees",
+  TB: "Rays",
+  TOR: "Blue Jays",
+  HOU: "Astros",
+  LAA: "Angels",
+  OAK: "Atheletics",
+  SEA: "Mariners",
+  TEX: "Rangers",
+  PHI: "Phillies",
+  WSH: "Nationals",
+  ARI: "Diamondbacks",
+  COL: "Rockies",
+  LAD: "Dodgers",
+  SD: "Padres",
+  SF: "Giants",
+  CHW: "White Sox",
 };

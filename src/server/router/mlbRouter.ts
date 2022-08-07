@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { createRouter } from "./context";
 import { getAllGames } from "../../api/mlb/getAllGames";
+import { getBoxScore } from "../../api/mlb/getBoxScore";
+import { getPlayByPlay } from "../../api/mlb/getPlayByPlay";
 
 export const mlbRouter = createRouter()
   .query("allGames", {
@@ -8,16 +10,25 @@ export const mlbRouter = createRouter()
       return await getAllGames();
     },
   })
-  .query("gameStats", {
+  .query("boxScore", {
     input: z.object({
       gameId: z.string().nullish(),
     }),
     async resolve({ input }) {
-      return {
-        mockGameData: `You sent ${input.gameId}`,
-      };
+      if (!input.gameId) return;
+      return await getBoxScore(input.gameId);
     },
   });
+
+// this will prob only be needed server side
+// .query("playByPlay", {
+//   input: z.object({
+//     gameId: z.string(),
+//   }),
+//   async resolve({ input }) {
+//     return await getPlayByPlay(input.gameId);
+//   },
+// });
 
 //  RULES FOR BASEBALL POINT TRACKING
 //   ------------------------------
