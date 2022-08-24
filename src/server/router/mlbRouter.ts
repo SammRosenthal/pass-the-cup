@@ -4,6 +4,7 @@ import { getAllGames } from "../../api/mlb/getAllGames";
 import { getBoxScore } from "../../api/mlb/getBoxScore";
 import { getPlayByPlay } from "../../api/mlb/getPlayByPlay";
 import { BoxScore } from "../../utils/mlb/shapes";
+import { cpuUsage } from "process";
 
 export const mlbRouter = createRouter()
   .query("allGames", {
@@ -40,23 +41,26 @@ export const mlbRouter = createRouter()
   if (currData.Game.CurrentHitterID !== prevData.Game.CurrentHitterID) {
     if (currData.Game.Outs !== prevData.Game.Outs) {
       if (currentTeamAtBat?.Strikeouts) {
-        // this should be the minus -2
-        // for a strike out
-        // return????
+        // strikeout
+        // return -2;
       }
-      // I think this can be the minus -1 for another out while in play
-      // return???????
+      // ground/pop out
+      // return -1;
     }
 
     // handle hits
     if (currData.Game.RunnerOnFirst) {
-      // single was hit +1
+      // single
+      // return 1;
     } else if (currData.Game.RunnerOnSecond) {
-      // double was hit +2
+      // double
+      // return 2;
     } else if (currData.Game.RunnerOnThird) {
-      // triple was hit +3
+      // triple
+      // return 3;
     } else {
-      // home run +the value of cup
+      // home run
+      // return cupValue;
     }
   }
 /** Planning stuff to make the game */
