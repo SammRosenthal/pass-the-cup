@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import ErrorFetchingGameDetails from "../../../components/ErrorViews/ErrorFetchingGameDetails";
 import DetailLayout from "../../../components/layouts/Detail";
+import ScoreCard from "../../../components/mlb/ScoreCard";
 import { Loader } from "../../../components/Loader";
 import { getTeamDisplayInfo } from "../../../utils/mlb/getTeamDisplayInfo";
 import { trpc } from "../../../utils/trpc";
@@ -26,9 +27,17 @@ export const GameView = () => {
         {isError && <ErrorFetchingGameDetails error={error} />}
         {isLoading && <Loader />}
         {!!data && (
-          <div>
-            {getTeamDisplayInfo(data.Game.AwayTeam).name} at{" "}
-            {getTeamDisplayInfo(data.Game.HomeTeam).name}
+          <div className="flex flex-col gap-y-3 w-full">
+            <div className="flex justify-center">
+              {getTeamDisplayInfo(data.Game.AwayTeam).name} at{" "}
+              {getTeamDisplayInfo(data.Game.HomeTeam).name}
+            </div>
+            <div className="flex flex-col items-center border w-full pb-2">
+              <h3 className="mb-2 mt-1 border-b-2 w-4/5 text-center">
+                Game Details
+              </h3>
+              <ScoreCard innings={data?.Innings} teamGames={data?.TeamGames} />
+            </div>
           </div>
         )}
       </div>

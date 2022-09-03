@@ -241,7 +241,7 @@ export interface TeamGameStats {
   Opponent: string;
   Day: Date;
   DateTime: Date;
-  HomeOrAway: string;
+  HomeOrAway: "HOME" | "AWAY";
   IsGameOver: boolean;
   GlobalGameID: number;
   GlobalOpponentID: number;
