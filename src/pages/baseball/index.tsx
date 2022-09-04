@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { trpc } from "../../utils/trpc";
-import DetailLayout from "../../components/layouts/Detail";
+import DetailLayout from "../../Layouts/Detail";
 import { Loader } from "../../components/Loader";
 import TeamCard from "../../components/TeamCard/TeamCard";
 import { NoGames } from "../../components/EmptyViews/NoGames";

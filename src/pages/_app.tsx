@@ -4,7 +4,7 @@ import type { AppRouter } from "../server/router";
 import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import "../styles/globals.css";
-import Base from "../components/layouts/Base";
+import Base from "../Layouts/Base";
 import Head from "next/head";
 
 const MyApp: AppType = ({ Component, pageProps }) => {

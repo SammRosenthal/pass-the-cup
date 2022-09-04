@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DetailLayout from "../../components/layouts/Detail";
+import DetailLayout from "../../Layouts/Detail";
 
 const container = "flex flex-col items-center pb-1";
 

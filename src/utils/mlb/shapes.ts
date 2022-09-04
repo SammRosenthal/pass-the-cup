@@ -53,9 +53,9 @@ export interface MlbGameData {
   ForecastWindSpeed: number;
   ForecastWindDirection: number;
   RescheduledFromGameID?: any;
-  RunnerOnFirst?: any; // boolean?
-  RunnerOnSecond?: any; // boolean?
-  RunnerOnThird?: any; // boolean?
+  RunnerOnFirst: boolean;
+  RunnerOnSecond: boolean;
+  RunnerOnThird: boolean;
   AwayTeamStartingPitcher: string;
   HomeTeamStartingPitcher: string;
   CurrentPitcher: string;

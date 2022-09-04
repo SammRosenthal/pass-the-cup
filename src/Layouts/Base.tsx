@@ -1,4 +1,4 @@
-import GlobalNav from "../views/GlobalNav/GlobalNav";
+import GlobalNav from "../components/views/GlobalNav/GlobalNav";
 
 export const Base: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
