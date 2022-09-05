@@ -5,6 +5,7 @@ import { getBoxScore } from "../../api/mlb/getBoxScore";
 import { getPlayByPlay } from "../../api/mlb/getPlayByPlay";
 import { BoxScore } from "../../utils/mlb/shapes";
 import { cpuUsage } from "process";
+import { MlbPassTheCup, Player } from "../games/MlbPassTheCup";
 
 export const mlbRouter = createRouter()
   .query("allGames", {
@@ -20,7 +21,25 @@ export const mlbRouter = createRouter()
       if (!input.gameId) return;
       return await getBoxScore(input.gameId);
     },
+  })
+  .mutation("createGame", {
+    input: z.object({ playerName: z.string().min(2) }),
+    async resolve({ input }) {
+      if (input.playerName) return;
+
+      return await new MlbPassTheCup(
+        new Player(input.playerName, "owner", 0),
+        "AAAAA",
+        9999
+      );
+    },
   });
+
+// need some sort of endpoint that can check if we need to update the
+// MlbPassTheCup instance
+// /** Planning stuff to make the game */
+//   const currData: BoxScore = {} as BoxScore;
+//   const prevData: BoxScore = {} as BoxScore;
 
 // this will prob only be needed server side
 // .query("playByPlay", {
@@ -31,49 +50,3 @@ export const mlbRouter = createRouter()
 //     return await getPlayByPlay(input.gameId);
 //   },
 // });
-
-// /** Planning stuff to make the game */
-//   const currData: BoxScore = {} as BoxScore;
-//   const prevData: BoxScore = {} as BoxScore;
-
-//   let currentTeamAtBat = currData.TeamGames.find(({ TeamID }) => TeamID === currData.Game.CurrentHittingTeamID); // currData.Game.CurrentHittingTeamID;
-
-//   if (currData.Game.CurrentHitterID !== prevData.Game.CurrentHitterID) {
-//     if (currData.Game.Outs !== prevData.Game.Outs) {
-//       if (currentTeamAtBat?.Strikeouts) {
-//         // strikeout
-//         // return -2;
-//       }
-//       // ground/pop out
-//       // return -1;
-//     }
-
-//     // handle hits
-//     if (currData.Game.RunnerOnFirst) {
-//       // single
-//       // return 1;
-//     } else if (currData.Game.RunnerOnSecond) {
-//       // double
-//       // return 2;
-//     } else if (currData.Game.RunnerOnThird) {
-//       // triple
-//       // return 3;
-//     } else {
-//       // home run
-//       // return cupValue;
-//     }
-//   }
-// /** Planning stuff to make the game */
-
-// //  RULES FOR BASEBALL POINT TRACKING
-// //   ------------------------------
-// //   | (-) means put money in cup |
-// //   | (+) means take money out   |
-// //   ------------------------------
-// //  -- Strikeout: -2
-// //  -- Fly/ground out: -1
-// //  -- Ejection: -20 -- Don't think we will have access to this data
-// //  -- Single: +1
-// //  -- Double: +2
-// //  -- Triple: +3
-// //  -- Home run: take the cup
