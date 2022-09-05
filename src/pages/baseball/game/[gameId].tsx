@@ -82,6 +82,7 @@ const GameDetails: React.FC<{
     <div className="flex flex-col items-center border w-full pb-2">
       <h3 className="mb-2 mt-1 border-b-2 w-4/5 text-center">Game</h3>
       <ScoreCard innings={innings} teamGames={teamGames} />
+      <div className="my-5">More game stats here? Need ideas...</div>
     </div>
   );
 };
