@@ -1,11 +1,5 @@
 type TRole = "owner" | "player";
 
-type TPlayer = {
-  name: string;
-  score: number;
-  role: TRole;
-};
-
 export class Player {
   name: string;
   score: number;

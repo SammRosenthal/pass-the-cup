@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import ErrorFetchingGameDetails from "../../../components/ErrorViews/ErrorFetchingGameDetails";
-import DetailLayout from "../../../Layouts/Detail";
+import DetailLayout from "../../../layouts/Detail";
 import ScoreCard from "../../../components/mlb/ScoreCard";
 import { Loader } from "../../../components/Loader";
 import { getTeamDisplayInfo } from "../../../utils/mlb/getTeamDisplayInfo";
@@ -8,6 +8,7 @@ import { trpc } from "../../../utils/trpc";
 import React from "react";
 import { Inning, MlbGameData, TeamGameStats } from "../../../utils/mlb/shapes";
 import { BaseballDiamond } from "../../../components/mlb/BaseballDiamond";
+import { useGameContext } from "../../../providers/GameProvider";
 
 const container = "flex flex-col items-center pb-1";
 
@@ -88,6 +89,10 @@ const GameDetails: React.FC<{
 };
 
 const BettingDetails = () => {
+  const { currentGame } = useGameContext();
+
+  if (!currentGame) return null;
+
   return (
     <div className="flex flex-col items-center border w-full pb-2">
       <h3 className="mb-2 mt-1 border-b-2 w-4/5 text-center">Pass the Cup</h3>

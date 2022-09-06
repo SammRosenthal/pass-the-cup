@@ -14,7 +14,7 @@ export const ScoreCard: React.FC<ScoreCardProps> = ({ innings, teamGames }) => {
     <div className="flex text-sm">
       <Title homeTeam={homeTeam.Team} awayTeam={awayTeam.Team} />
       {innings?.map((data) => (
-        <Inning key={data.GameID} inningData={data} />
+        <Inning key={data.InningID} inningData={data} />
       ))}
       <GameStats homeTeam={homeTeam} awayTeam={awayTeam} />
     </div>
@@ -39,7 +39,7 @@ const Inning: React.FC<{ inningData: Inning }> = ({ inningData }) => {
   const { InningNumber, AwayTeamRuns, HomeTeamRuns } = inningData;
 
   return (
-    <div className="flex flex-col w-6">
+    <div className="flex flex-col w-4">
       <span className="text-center font-bold">{InningNumber}</span>
       <span className="text-center">{AwayTeamRuns}</span>
       <span className="text-center">{HomeTeamRuns}</span>

@@ -4,8 +4,9 @@ import type { AppRouter } from "../server/router";
 import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import "../styles/globals.css";
-import Base from "../Layouts/Base";
+import Base from "../layouts/Base";
 import Head from "next/head";
+import { GameProvider } from "../providers/GameProvider";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -15,7 +16,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <meta name="description" content="Pass the Cup" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Component {...pageProps} />
+      <GameProvider>
+        <Component {...pageProps} />
+      </GameProvider>
     </Base>
   );
 };

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import DetailLayout from "../Layouts/Detail";
+import DetailLayout from "../layouts/Detail";
 
 import {
   IoIosBaseball,
